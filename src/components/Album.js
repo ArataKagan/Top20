@@ -47,6 +47,17 @@ class Album extends Component {
     }
   }
 
+  playDisplay(song) {
+    //Play button display
+    console.log(song)
+
+  }
+
+  pauseDisplay(song) {
+
+  }
+
+
 
   render() {
     return (
@@ -70,13 +81,16 @@ class Album extends Component {
           <tbody>
           {this.state.album.songs.map((song, index) =>
               <tr className = 'song' key={index}>
+
                 <span className='ion-play' onClick = {() => this.handleSongClick(song)}>
                   <i class="icon ion-md-play-circle"></i>
                 </span>
+
                 <span className='ion-pause' onClick = {() => this.handleSongClick(song)}>
                   <i class="icon ion-md-pause"></i>
                 </span>
-                <td onMouseEnter = {() => this.playDisplay(song)} onMouseLeave = {() => this.pause}>{song.title}</td>
+
+                <td onMouseEnter = {() => this.playDisplay(song)} onMouseLeave = {() => this.pauseDisplay(song)}> {song.title} </td>
                 <td>{song.duration}</td>
               </tr>
             )}
