@@ -6,8 +6,7 @@ import albumData from './../data/albums';
 class Album extends Component {
   constructor(props){
     super(props);
-    // whatever selected album's slug matches, store the album data into
-    //album
+
     const album = albumData.find( album => {
       return album.slug === this.props.match.params.slug
     });
@@ -15,7 +14,8 @@ class Album extends Component {
     this.state = {
       album : album,
       currentSong: album.songs[0],
-      isPlaying: false
+      isPlaying: false,
+      onHover: false
     };
 
     this.audioElement = document.createElement('audio');
@@ -47,12 +47,29 @@ class Album extends Component {
     }
   }
 
+  onMouseEnter(index){
+    this.setState({onHover: index})
+  }
+
+  onMouseLeave(){
+    this.setState({onHover: false})
+  }
+
+  iconDisplay(song, index){
+    if (this.state.onHover === index && this.state.isPlaying === true) {
+      return <span><i className="icon ion-md-pause"></i></span>
+    } else if (this.state.onHover === index && this.state.isPlaying === false){
+      return <span><i className="icon ion-md-play"></i></span>
+    }
+    return index + 1;
+  }
+
 
   render() {
     return (
       <section className='album'>
         <section id='album-info'>
-          <img id='album-cover-art' src={this.state.album.albumCover}/>
+          <img id='album-cover-art' src={this.state.album.albumCover} />
           <div className='album-details'>
             <h1 id='album-title'>{this.state.album.title}</h1>
             <h2 className='artist'>{this.state.album.artist}</h2>
@@ -69,11 +86,30 @@ class Album extends Component {
           </colgroup>
           <tbody>
           {this.state.album.songs.map((song, index) =>
+<<<<<<< HEAD
               <tr className = 'song' key={index} onClick = {() => this.handleSongClick(song)}>
                 <td key={index + 1}>{index + 1}</td>
                 <td key={song.title}>{song.title}</td>
                 <td key={song.duration}>{song.duration}</td>
               </tr>)}
+||||||| merged common ancestors
+              <tr className = 'song' key={index} onClick = {() => this.handleSongClick(song)}>
+                <td>{index}</td>
+                <td>{song.title}</td>
+                <td>{song.duration}</td>
+              </tr>)}
+=======
+              <tr className = 'song' key={index}
+              onClick = {() => this.handleSongClick(song)}
+              onMouseEnter={() => this.onMouseEnter(index)}
+              onMouseLeave={() => this.onMouseLeave()}>
+
+                <td key={index}>{this.iconDisplay(song, index)}</td>
+                <td key={song.title}>{song.title}</td>
+                <td key={song.duration}>{song.duration}</td>
+              </tr>
+            )}
+>>>>>>> audio-playback-assignment
           </tbody>
         </table>
       </section>
