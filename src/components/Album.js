@@ -27,7 +27,7 @@ class Album extends Component {
 
         </section>
 
-        <table id='song-list' textAlign='center' verticalAlign='middle'>
+        <table id='song-list'>
           <colgroup>
             <col id='song-number-column' />
             <col id='song-title-column' />
