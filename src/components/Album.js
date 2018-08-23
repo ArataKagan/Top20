@@ -61,7 +61,7 @@ class Album extends Component {
 
         </section>
 
-        <table id='song-list' textAlign='center' verticalAlign='middle'>
+        <table id='song-list'>
           <colgroup>
             <col id='song-number-column' />
             <col id='song-title-column' />
@@ -70,9 +70,9 @@ class Album extends Component {
           <tbody>
           {this.state.album.songs.map((song, index) =>
               <tr className = 'song' key={index} onClick = {() => this.handleSongClick(song)}>
-                <td>{index}</td>
-                <td>{song.title}</td>
-                <td>{song.duration}</td>
+                <td key={index + 1}>{index + 1}</td>
+                <td key={song.title}>{song.title}</td>
+                <td key={song.duration}>{song.duration}</td>
               </tr>)}
           </tbody>
         </table>
