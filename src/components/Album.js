@@ -86,30 +86,20 @@ class Album extends Component {
           </colgroup>
           <tbody>
           {this.state.album.songs.map((song, index) =>
-<<<<<<< HEAD
               <tr className = 'song' key={index} onClick = {() => this.handleSongClick(song)}>
                 <td key={index + 1}>{index + 1}</td>
                 <td key={song.title}>{song.title}</td>
                 <td key={song.duration}>{song.duration}</td>
-              </tr>)}
-||||||| merged common ancestors
-              <tr className = 'song' key={index} onClick = {() => this.handleSongClick(song)}>
-                <td>{index}</td>
-                <td>{song.title}</td>
-                <td>{song.duration}</td>
-              </tr>)}
-=======
+              </tr>
               <tr className = 'song' key={index}
               onClick = {() => this.handleSongClick(song)}
               onMouseEnter={() => this.onMouseEnter(index)}
               onMouseLeave={() => this.onMouseLeave()}>
-
                 <td key={index}>{this.iconDisplay(song, index)}</td>
                 <td key={song.title}>{song.title}</td>
                 <td key={song.duration}>{song.duration}</td>
               </tr>
             )}
->>>>>>> audio-playback-assignment
           </tbody>
         </table>
       </section>
