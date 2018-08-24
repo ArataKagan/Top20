@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import album data from inside of data folder
 // name albumData
 import albumData from './../data/albums';
+import PlayerBar from './PlayerBar';
 
 class Album extends Component {
   constructor(props){
@@ -38,7 +39,7 @@ class Album extends Component {
   }
 
   handleSongClick(song) {
-    const isSameSong = this.state.currentSong === song;
+    const isSameSong = (this.state.currentSong === song);
     if (this.state.isPlaying && isSameSong) {
       this.pause();
     } else {
@@ -57,9 +58,9 @@ class Album extends Component {
 
   iconDisplay(song, index){
     if (this.state.onHover === index && this.state.isPlaying === true) {
-      return <span><i className="icon ion-md-pause"></i></span>
+      return <span className="icon ion-md-pause"></span>
     } else if (this.state.onHover === index && this.state.isPlaying === false){
-      return <span><i className="icon ion-md-play"></i></span>
+      return <span className="icon ion-md-play"></span>
     }
     return index + 1;
   }
@@ -86,19 +87,6 @@ class Album extends Component {
           </colgroup>
           <tbody>
           {this.state.album.songs.map((song, index) =>
-<<<<<<< HEAD
-              <tr className = 'song' key={index} onClick = {() => this.handleSongClick(song)}>
-                <td key={index + 1}>{index + 1}</td>
-                <td key={song.title}>{song.title}</td>
-                <td key={song.duration}>{song.duration}</td>
-              </tr>)}
-||||||| merged common ancestors
-              <tr className = 'song' key={index} onClick = {() => this.handleSongClick(song)}>
-                <td>{index}</td>
-                <td>{song.title}</td>
-                <td>{song.duration}</td>
-              </tr>)}
-=======
               <tr className = 'song' key={index}
               onClick = {() => this.handleSongClick(song)}
               onMouseEnter={() => this.onMouseEnter(index)}
@@ -109,9 +97,12 @@ class Album extends Component {
                 <td key={song.duration}>{song.duration}</td>
               </tr>
             )}
->>>>>>> audio-playback-assignment
           </tbody>
         </table>
+        <PlayerBar
+          isPlaying={this.state.isPlaying}
+          currentSong={this.state.currentSong}
+          handleSongClick={() => this.handleSongClick(this.state.currentSong)} />
       </section>
     );
   }
