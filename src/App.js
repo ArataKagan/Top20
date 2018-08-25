@@ -24,7 +24,6 @@ class App extends Component {
           {/* set exact if you don't want any other path to match
           for example, '/blabla' doesn't match but only '/' will
           show the Landing component */}
-
           <Route exact path='/' component={Landing} />
           <Route path='/library' component={Library} />
           {/* set :slug so that any data matched with slug keyword
