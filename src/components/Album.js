@@ -36,12 +36,13 @@ class Album extends Component {
   }
 
   componentDidMount(){
+
     this.eventListeners = {
       timeupdate: e => {
         this.setState({ currentTime: this.audioElement.currentTime});
       },
       durationchange: e => {
-        this.setState({ duration: this.audioElement.duration });
+        this.setState({ duration: this.audioElement.duration});
       },
       volumechange: e => {
         this.setState({ volume: this.audioElement.volume });
@@ -91,14 +92,14 @@ class Album extends Component {
     this.play();
   }
 
-  /*formatTime(time){
-  	if(isNaN(time)){
-  		return '-:--'
-  		}
-  	const min = Math.floor(time/60);
-  	const sec = time - min * 60;
-  	return min+':'+sec;
-  };*/
+  formatTime(time){
+    if(isNaN(time)){
+      return '-:--'
+      }
+    const min = Math.floor(time/60);
+    const sec = Math.round(time - min * 60);
+    return min+':'+sec;
+  };
 
   handleTimeChange(e){
     const newTime = this.audioElement.duration * e.target.value;
@@ -175,6 +176,7 @@ class Album extends Component {
           handleNextClick={() => this.handleNextClick()}
           handleTimeChange={(e) => this.handleTimeChange(e)}
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
+          formatTime={(e) => this.formatTime(e)}
         />
       </section>
     );
