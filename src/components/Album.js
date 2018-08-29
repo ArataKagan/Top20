@@ -98,7 +98,9 @@ class Album extends Component {
       }
     const min = Math.floor(time/60);
     const sec = Math.round(time - min * 60);
-    return min+':'+sec;
+    var result = min;
+        result += ':' + (sec < 10 ? "0" + sec : sec);
+    return result;
   };
 
   handleTimeChange(e){
@@ -159,7 +161,7 @@ class Album extends Component {
 
                 <td key={index}>{this.iconDisplay(song, index)}</td>
                 <td key={song.title}>{song.title}</td>
-                <td key={song.duration}>{song.duration}</td>
+                <td key={song.duration}>{this.formatTime(song.duration)}</td>
               </tr>
             )}
           </tbody>
