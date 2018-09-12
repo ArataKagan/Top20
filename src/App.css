@@ -10,11 +10,81 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
-
+.hero-title {
+  font-family: 'Permanent Marker', cursive;
+  padding-left: 80px;
+  background-image: -webkit-linear-gradient(black, gray 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .point-title {
   font-family: 'Permanent Marker', cursive;
+  font-size: 150%;
 } 
+
+.row-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; 
+  
+}
+
+
+/* vertical spacing between columns */
+
+[class*="col-"] {
+  margin-bottom: 30px;
+}
+
+.content {
+  height: 100%;
+  padding: 20px 20px 10px;
+  color: gray;
+  font-family: American Typewriter, serif;
+}
+
+nav {
+  font-family: 'Permanent Marker', cursive;
+  background-image: -webkit-linear-gradient(black, gray 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-color: darkgray;
+  list-style-type: none;
+	margin: 0;
+	padding: 0;
+  text-align: center;
+  border-bottom: double;
+  opacity: 0.5;
+} 
+
+.library {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 150%;
+}
+
+.song {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 150%;
+}
+
+.album-details {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 150%;
+}
+
+#time-control {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 100%;
+} 
+
+#volume-control {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 100%;
+}
+
 
 
 
