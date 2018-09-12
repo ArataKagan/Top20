@@ -1,9 +1,9 @@
 import React from 'react';
-import './Landing.css';
+
 
 const Landing = () => (
   <section className='landing container-fluid'>
-    <h1 className='hero-title'>Turn the music up!</h1>
+    <h3 className='hero-title'>Turn the music up!</h3>
 
     <section className='selling-points row-flex'>
       <div className='point col-md-4 col-sm-6 col-xs-12'>
