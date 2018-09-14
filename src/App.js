@@ -15,7 +15,7 @@ class App extends Component {
           <nav>
             <ul>
               <Link to='/' >Landing</Link>
-              {'  '}
+              <span> </span>
               <Link to='/library'>Library</Link>
             </ul>
           </nav>
