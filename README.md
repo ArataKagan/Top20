@@ -1,4 +1,4 @@
-[Imgur](https://i.imgur.com/CnUnjon.png)
+![Imgur](https://i.imgur.com/CnUnjon.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
