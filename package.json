@@ -1,17 +1,29 @@
 {
   "name": "bloc-jams-react",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
-  },
+  "version": "1.0.0",
+  "description": "Full stack music player app",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "client": "cd client && npm start",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArataKagan/bloc-jams-react.git"
+  },
+  "author": "Arata Kagan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ArataKagan/bloc-jams-react/issues"
+  },
+  "homepage": "https://github.com/ArataKagan/bloc-jams-react#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0"
   }
 }
