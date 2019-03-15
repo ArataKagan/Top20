@@ -65,9 +65,27 @@ nav {
   font-size: 150%;
 }
 
+.album_image {
+  height: 200px;
+  width: 200px;
+}
+
 .song {
   font-family: 'Permanent Marker', cursive;
   font-size: 150%;
+}
+
+.song-lists {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  text-align: 'center';
+}
+
+.song-list {
+  display: inline-block;
+  margin: 20px;
+  text-align: 'center';
 }
 
 .album-details {

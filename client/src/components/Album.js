@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
 
@@ -36,6 +36,10 @@ class Album extends Component {
   }
 
   componentDidMount(){
+    axios.get('https://api.napster.com/v2.0/playlists?apikey=NzI5NTMzY2ItYWE0Yy00YjUyLTkxYjItYzFmMWZlNzJjN2E3')
+      .then(response => {
+        console.log(response);
+      })
 
     this.eventListeners = {
       timeupdate: e => {
@@ -145,27 +149,28 @@ class Album extends Component {
           </div>
 
         </section>
+        <div id="song-lists">
+          <table id='song-list'>
+            <colgroup>
+              <col id='song-number-column' />
+              <col id='song-title-column' />
+              <col id='song-duration-column' />
+            </colgroup>
+            <tbody>
+            {this.state.album.songs.map((song, index) =>
+                <tr className = 'song' key={index}
+                onClick = {() => this.handleSongClick(song)}
+                onMouseEnter={() => this.onMouseEnter(index)}
+                onMouseLeave={() => this.onMouseLeave()}>
 
-        <table id='song-list'>
-          <colgroup>
-            <col id='song-number-column' />
-            <col id='song-title-column' />
-            <col id='song-duration-column' />
-          </colgroup>
-          <tbody>
-          {this.state.album.songs.map((song, index) =>
-              <tr className = 'song' key={index}
-              onClick = {() => this.handleSongClick(song)}
-              onMouseEnter={() => this.onMouseEnter(index)}
-              onMouseLeave={() => this.onMouseLeave()}>
-
-                <td key={index}>{this.iconDisplay(song, index)}</td>
-                <td key={song.title}>{song.title}</td>
-                <td key={song.duration}>{this.formatTime(song.duration)}</td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                  <td key={index}>{this.iconDisplay(song, index)}</td>
+                  <td key={song.title}>{song.title}</td>
+                  <td key={song.duration}>{this.formatTime(song.duration)}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
 
         <PlayerBar
           isPlaying={this.state.isPlaying}
