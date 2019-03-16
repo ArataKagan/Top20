@@ -8,8 +8,7 @@ class Library extends Component {
   constructor(props){
     super(props);
     this.state = { 
-      albums: [],
-      album: []
+      albums: []
      };
   }
 
@@ -23,8 +22,11 @@ class Library extends Component {
   }
 
   render(){
+    console.log(this.state.albums);
     let albumName = [];
+    let albumId = [];
     let albumImage = [];
+    
     
     // loop over response and store name and image
     for (const key in this.state.albums.playlists) {
@@ -32,6 +34,7 @@ class Library extends Component {
         for(const imageKey in obj.images){
           var imageObj = obj.images[imageKey];
             albumName.push(obj.name);
+            albumId.push(obj.id);
             albumImage.push(imageObj.url);
         }
     }
@@ -39,11 +42,14 @@ class Library extends Component {
     // create children element 
     const albumData = albumImage.map( (value, index) => {
       const names = albumName[index];
+      const id = albumId[index];
       return (
-        <div key={value}>
-          <img src={value} key={value} />
-          <p>{names}</p>
-        </div>
+        <Link to={`/album/${id}`} key={id}>
+          <div key={value}>
+            <img src={value} key={value} />
+            <p>{names}</p>
+          </div>
+        </Link>
       ); 
     })
     
