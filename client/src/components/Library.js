@@ -1,53 +1,55 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import albumData from './../data/albums';
+// import albumData from './../data/albums';
 import axios from 'axios';
+const API_KEY = 'NzI5NTMzY2ItYWE0Yy00YjUyLTkxYjItYzFmMWZlNzJjN2E3';
 
 class Library extends Component {
   constructor(props){
     super(props);
-    this.state = { albums: null };
+    this.state = { 
+      albums: [],
+      album: []
+     };
   }
 
   componentDidMount(){
-    axios.get('https://api.napster.com/v2.0/playlists?apikey=NzI5NTMzY2ItYWE0Yy00YjUyLTkxYjItYzFmMWZlNzJjN2E3')
+    axios.get('https://api.napster.com/v2.0/playlists?apikey=' + API_KEY)
     .then(response => {
       this.setState({
-        albums: response.data.playlists
+        albums: response.data
       })
     })
   }
 
   render(){
+    let albumName = [];
+    let albumImage = [];
     
-    
-    for (var album in this.state.albums){
-      var obj = this.state.albums[album];
-      var albumName = obj.name;
-      <div>{albumName}</div>
-
-      // get album image
-      for (var image in obj.images){
-        var images = obj.images[image];
-        var albumImage = images.url;
-        <img src={albumImage} alt={album_image} />
-      }
+    // loop over response and store name and image
+    for (const key in this.state.albums.playlists) {
+      var obj = this.state.albums.playlists[key];
+        for(const imageKey in obj.images){
+          var imageObj = obj.images[imageKey];
+            albumName.push(obj.name);
+            albumImage.push(imageObj.url);
+        }
     }
-
+    
+    // create children element 
+    const albumData = albumImage.map( (value, index) => {
+      const names = albumName[index];
+      return (
+        <div key={value}>
+          <img src={value} key={value} />
+          <p>{names}</p>
+        </div>
+      ); 
+    })
     
     return (
       <section className='library'>
-        {/* {this.state.albums.map( (album, index) =>
-            <Link to={`/album/${album.slug}`} key={index}>
-              <div className='photo-gallery col-sm-6 col-md-4'>
-                <img src={album.albumCover} alt={album.title} className='album_image'/>
-                <div>{album.title}</div>
-                <div>{album.artist}</div>
-                <div>{album.songs.length} songs</div> 
-              </div>
-            </Link>
-          )
-        } */}
+        {albumData}
       </section>
     );
   }
