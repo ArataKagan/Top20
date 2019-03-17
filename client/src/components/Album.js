@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import albumData from './../data/albums';
 import PlayerBar from './PlayerBar';
+const API_KEY = 'NzI5NTMzY2ItYWE0Yy00YjUyLTkxYjItYzFmMWZlNzJjN2E3';
 
 class Album extends Component {
   constructor(props){
     super(props);
 
-    const album = albumData.find( album => {
-      return album.slug === this.props.match.params.slug
-    });
-
     this.state = {
-      album : album,
-      currentSong: album.songs[0],
+      album : null,
+      currentSong: null,
       currentTime: 0,
-      duration: album.songs[0].duration,
+      duration: 0,
       volume: 0,
       isPlaying: false,
       onHover: false
     };
 
     this.audioElement = document.createElement('audio');
-    this.audioElement.src = album.songs[0].audioSrc;
   }
 
   play() {
@@ -36,10 +31,16 @@ class Album extends Component {
   }
 
   componentDidMount(){
-    axios.get('https://api.napster.com/v2.0/playlists?apikey=NzI5NTMzY2ItYWE0Yy00YjUyLTkxYjItYzFmMWZlNzJjN2E3')
+    axios.get('https://api.napster.com/v2.0/playlists/' + this.props.match.params.id + '/tracks?apikey=' + API_KEY + '&limit=20')
       .then(response => {
-        console.log(response);
+        console.log(response.data.tracks);
+        this.setState({
+          album: response.data.tracks
+        })
       })
+    
+    
+    // this.audioElement.src = this.state.album.songs[0].audioSrc;
 
     this.eventListeners = {
       timeupdate: e => {
@@ -52,6 +53,7 @@ class Album extends Component {
         this.setState({ volume: this.audioElement.volume });
       }
     };
+
     this.audioElement.addEventListener('timeupdate', this.eventListeners.timeupdate);
     this.audioElement.addEventListener('durationchange', this.eventListeners.durationchange);
     this.audioElement.addEventListener('volumechange', this.eventListeners.volumechange);
@@ -138,14 +140,31 @@ class Album extends Component {
 
 
   render() {
+
+    let songCover = [];
+    let songName = [];
+    let songArtist = [];
+    let songLength = [];
+    let songURL = [];
+
+    let album = this.state.album; 
+    
+    for( const key in album){
+      let obj = album[key];
+      console.log(obj.albumName);
+      console.log(obj.artistName);
+
+    }
+    
+
     return (
       <section className='album'>
         <section id='album-info'>
-          <img id='album-cover-art' src={this.state.album.albumCover} />
+          {/* <img id='album-cover-art' src={this.state.album.albumCover} /> */}
           <div className='album-details'>
-            <h1 id='album-title'>{this.state.album.title}</h1>
+            {/* <h1 id='album-title'>{this.state.album.title}</h1>
             <h2 className='artist'>{this.state.album.artist}</h2>
-            <div id='release-info'>{this.state.album.releaseInfo}</div>
+            <div id='release-info'>{this.state.album.releaseInfo}</div> */}
           </div>
 
         </section>
@@ -157,7 +176,7 @@ class Album extends Component {
               <col id='song-duration-column' />
             </colgroup>
             <tbody>
-            {this.state.album.songs.map((song, index) =>
+            {/* {this.state.album.songs.map((song, index) =>
                 <tr className = 'song' key={index}
                 onClick = {() => this.handleSongClick(song)}
                 onMouseEnter={() => this.onMouseEnter(index)}
@@ -167,7 +186,7 @@ class Album extends Component {
                   <td key={song.title}>{song.title}</td>
                   <td key={song.duration}>{this.formatTime(song.duration)}</td>
                 </tr>
-              )}
+              )} */}
             </tbody>
           </table>
         </div>

@@ -15,6 +15,7 @@ class Library extends Component {
   componentDidMount(){
     axios.get('https://api.napster.com/v2.0/playlists?apikey=' + API_KEY)
     .then(response => {
+      console.log(response.data);
       this.setState({
         albums: response.data
       })
@@ -26,13 +27,15 @@ class Library extends Component {
     let albumName = [];
     let albumId = [];
     let albumImage = [];
+
+    let playlists = this.state.albums.playlists;
     
     
     // loop over response and store name and image
-    for (const key in this.state.albums.playlists) {
-      var obj = this.state.albums.playlists[key];
+    for (const key in playlists) {
+      let obj = playlists[key];
         for(const imageKey in obj.images){
-          var imageObj = obj.images[imageKey];
+          let imageObj = obj.images[imageKey];
             albumName.push(obj.name);
             albumId.push(obj.id);
             albumImage.push(imageObj.url);
