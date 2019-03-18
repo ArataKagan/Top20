@@ -39,7 +39,6 @@ class Album extends Component {
         })
       })
     
-    
     // this.audioElement.src = this.state.album.songs[0].audioSrc;
 
     this.eventListeners = {
@@ -67,7 +66,7 @@ class Album extends Component {
   }
 
   setSong(song) {
-    this.audioElement.src = song.audioSrc;
+    this.audioElement.src = song;
     this.setState({ currentSong: song });
   }
 
@@ -121,27 +120,28 @@ class Album extends Component {
     this.setState({ volume: newVolume });
   }
 
-  onMouseEnter(index){
-    this.setState({onHover: index})
+  onMouseEnter(url){
+    this.setState({onHover: url});
   }
 
   onMouseLeave(){
-    this.setState({onHover: false})
+    this.setState({onHover: false});
   }
 
-  iconDisplay(song, index){
-    if (this.state.onHover === index && this.state.isPlaying === true) {
+  iconDisplay(url){
+    console.log('icon display entered');
+    if(this.state.onHover === url && this.state.isPlaying === true){
       return <span className="icon ion-md-pause"></span>
-    } else if (this.state.onHover === index && this.state.isPlaying === false){
+    } else if (this.state.onHover === url && this.state.isPlaying === false){
       return <span className="icon ion-md-play"></span>
     }
-    return index + 1;
   }
 
 
   render() {
 
-    let songCover = [];
+    let songId = [];
+    let songImage = [];
     let songName = [];
     let songArtist = [];
     let songLength = [];
@@ -151,46 +151,42 @@ class Album extends Component {
     
     for( const key in album){
       let obj = album[key];
-      console.log(obj.albumName);
-      console.log(obj.artistName);
-
+      songId.push(obj.albumId);
+      songImage.push('http://direct.rhapsody.com/imageserver/v2/albums/' + obj.albumId + '/images/300x300.jpg');
+      songName.push(obj.albumName);
+      songArtist.push(obj.artistName);
+      songLength.push(obj.playbackSeconds);
+      songURL.push(obj.previewURL);
     }
-    
+    const songData = songId.map( (idValue, index) => {
+      const image = songImage[index];
+      const name = songName[index];
+      const artist = songArtist[index];
+      const length = songLength[index];
+      const url = songURL[index];
+      return (
+        <div key={index} className='albumContainer'>
+          <div className='imageContainer'>
+            <img
+              className='songImage' 
+              src={image}
+              onClick = {() => this.handleSongClick(url)} 
+              onMouseEnter={() => this.onMouseEnter(url)}
+              onMouseLeave={() => this.onMouseLeave()}
+            />
+            <div className='overlay'>
+              <div className='hoverIcon'>{this.iconDisplay(url)}</div>
+            </div>
+              <p>{name}</p>
+              <p>{artist}</p>
+          </div>
+        </div>
+      )
+    })
 
+    
     return (
       <section className='album'>
-        <section id='album-info'>
-          {/* <img id='album-cover-art' src={this.state.album.albumCover} /> */}
-          <div className='album-details'>
-            {/* <h1 id='album-title'>{this.state.album.title}</h1>
-            <h2 className='artist'>{this.state.album.artist}</h2>
-            <div id='release-info'>{this.state.album.releaseInfo}</div> */}
-          </div>
-
-        </section>
-        <div id="song-lists">
-          <table id='song-list'>
-            <colgroup>
-              <col id='song-number-column' />
-              <col id='song-title-column' />
-              <col id='song-duration-column' />
-            </colgroup>
-            <tbody>
-            {/* {this.state.album.songs.map((song, index) =>
-                <tr className = 'song' key={index}
-                onClick = {() => this.handleSongClick(song)}
-                onMouseEnter={() => this.onMouseEnter(index)}
-                onMouseLeave={() => this.onMouseLeave()}>
-
-                  <td key={index}>{this.iconDisplay(song, index)}</td>
-                  <td key={song.title}>{song.title}</td>
-                  <td key={song.duration}>{this.formatTime(song.duration)}</td>
-                </tr>
-              )} */}
-            </tbody>
-          </table>
-        </div>
-
         <PlayerBar
           isPlaying={this.state.isPlaying}
           currentSong={this.state.currentSong}
@@ -204,6 +200,9 @@ class Album extends Component {
           handleVolumeChange={(e) => this.handleVolumeChange(e)}
           formatTime={(e) => this.formatTime(e)}
         />
+        <div className='outerAlbumContainer'>
+         {songData}
+        </div>
       </section>
     );
   }

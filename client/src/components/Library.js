@@ -43,13 +43,13 @@ class Library extends Component {
     }
     
     // create children element 
-    const albumData = albumImage.map( (value, index) => {
+    const albumData = albumImage.map( (imageValue, index) => {
       const names = albumName[index];
       const id = albumId[index];
       return (
         <Link to={`/album/${id}`} key={id}>
-          <div key={value}>
-            <img src={value} key={value} />
+          <div key={imageValue} className='libraryItem'>
+            <img src={imageValue} key={imageValue} />
             <p>{names}</p>
           </div>
         </Link>

@@ -2,7 +2,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: url('https://images.pexels.com/photos/92083/pexels-photo-92083.jpeg?cs=srgb&dl=cassette-cassette-tape-music-92083.jpg&fm=jpg') no-repeat center center fixed;  */
+  /* background-color: black;
+  background-image: linear-gradient(black, gray); */
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

@@ -14,12 +14,13 @@ class App extends Component {
         <header>
           <nav>
             <ul>
+              <h1 id='title'>Top 20</h1>
               <Link to='/' >Landing</Link>
               <span> </span>
               <Link to='/library'>Library</Link>
             </ul>
           </nav>
-          <h1>Bloc Jams</h1>
+          
         </header>
         <main>
           <Route exact path='/' component={Landing} />
