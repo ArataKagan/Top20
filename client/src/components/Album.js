@@ -33,7 +33,7 @@ class Album extends Component {
   componentDidMount(){
     axios.get('https://api.napster.com/v2.0/playlists/' + this.props.match.params.id + '/tracks?apikey=' + API_KEY + '&limit=20')
       .then(response => {
-        console.log(response.data.tracks);
+        console.log(response);
         this.setState({
           album: response.data.tracks
         })
@@ -177,8 +177,8 @@ class Album extends Component {
             <div className='overlay'>
               <div className='hoverIcon'>{this.iconDisplay(url)}</div>
             </div>
-              <p>{name}</p>
-              <p>{artist}</p>
+              <p className='songName'>{name}</p>
+              <p className='songArtist'>{artist}</p>
           </div>
         </div>
       )

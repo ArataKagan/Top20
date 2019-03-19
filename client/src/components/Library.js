@@ -15,7 +15,6 @@ class Library extends Component {
   componentDidMount(){
     axios.get('https://api.napster.com/v2.0/playlists?apikey=' + API_KEY)
     .then(response => {
-      console.log(response.data);
       this.setState({
         albums: response.data
       })
@@ -50,7 +49,7 @@ class Library extends Component {
         <Link to={`/album/${id}`} key={id}>
           <div key={imageValue} className='libraryItem'>
             <img src={imageValue} key={imageValue} />
-            <p>{names}</p>
+            <p className='albumName'>{names}</p>
           </div>
         </Link>
       ); 
