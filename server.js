@@ -6,19 +6,6 @@ const path = require('path');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-
-// app.get('/api/hello', (req, res) => {
-//     res.send({ express: 'Hello from Express'});
-// });
-
-// app.post('/api/world', (req, res) => {
-//     console.log(req.body);
-//     res.send(
-//         `I received your POST request. This is what you sent me: ${req.body.post}`,
-//     );
-// });
-
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
 
