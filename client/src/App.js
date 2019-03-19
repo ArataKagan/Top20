@@ -12,13 +12,21 @@ class App extends Component {
     return (
       <div className="App" >
         <header>
-          <nav>
-            <ul>
-              <h1 id='title'>Top 20</h1>
-              <Link to='/' >Landing</Link>
-              <span> </span>
-              <Link to='/library'>Library</Link>
-            </ul>
+          <nav className = 'navbar navbar-expand-lg navbar-light bg-light'>
+            <a className="navbar-brand" href='#'>Top 20</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul className= 'navbar-nav mr-auto'>
+                <li className="nav-item">
+                  <Link to='/' className="nav-link">Landing</Link>
+                </li>
+                <li className="nav-item">
+                  <Link to='/library' className="nav-link">Library</Link>
+                </li>
+              </ul>
+            </div>
           </nav>
           
         </header>
