@@ -1,6 +1,6 @@
 # Top20
 
-![Imgur](https://i.imgur.com/Ixkgfdf.png)
+![Imgur](https://i.imgur.com/4ChduHq.png)
 
 Music discover app made with React, Node, Express and Napster API. 
 Please see the production site [here](https://powerful-wildwood-28922.herokuapp.com/library)
