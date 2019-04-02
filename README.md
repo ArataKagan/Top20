@@ -3,7 +3,7 @@
 ![Imgur](https://i.imgur.com/xFBR5ct.png)
 
 Music discover app made with React, Node, Express and Napster API. 
-Please see the production site [here](https://powerful-wildwood-28922.herokuapp.com/library)
+Please see the production site [here](https://powerful-wildwood-28922.herokuapp.com)
 
 ## How to Clone 
 
